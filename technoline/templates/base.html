@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{% block title %}Tecnoline{% endblock %}</title>
+	<!-- Load static - Bootstrap v5.2.3 -->
+	{% load static %}
+	<link href="{% static 'css/bootstrap.min.css' %}">
+	<script src="{% static 'bootstrap.min.js' %}"></script>
+</head>
+
+<body>
+	<!-- TODO nav.html -->
+	{% block content %}
+		<!-- page content -->
+	{% endblock %}
+	<!-- TODO footer.html -->
+</body>
+</html>
