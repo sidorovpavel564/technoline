@@ -1,0 +1,7 @@
+<img class="card-img" src="{{ product.image.url }}" alt="">
+
+{% for product in product_list %}
+				<div class="carousel-item active">
+					<img src="{{ product.image.url }}" class="d-block w-100">
+				</div>
+				{% endfor %}
