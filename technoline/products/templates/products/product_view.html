@@ -4,12 +4,13 @@
 	<div class="container">
 		<div class="row align-items-center">
 			<div class="col">
-				<!-- TODO imageslider -->
-				{% include "slider.html" with list=products %}
+				{% include "slider.html" with product=product %}
 				asdasdddddddddddddddddddddddddddddddddddddddddddddd
 			</div>
 			<div class="col">
 				<ul>
+					{% for attribute in product.attributes.get.get_model_fields %}
+					<li>{{ attribute }}: {{ attribute.size }}</li>
 					<li>Model: {{ smartphone.model_name }}</li>
 					<li>Release Date: {{ smartphone.release_date }}</li>
 					<li>Processor model: {{ smartphone.processor_model }}</li>
@@ -17,6 +18,7 @@
 					<li>Display Size: {{ smartphone.display_size }}</li>
 					<li>Display Resolution: {{ smartphone.display_resolution }}</li>
 					<li>Color: {{ smartphone.color }}</li>
+					{% endfor %}
 				</ul>
 			</div> <!--col-->
 		</div> <!--row-->

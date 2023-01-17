@@ -18,7 +18,7 @@ class Product(models.Model):
     product_name = models.CharField(max_length=50, verbose_name='Product/Model name')
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     description = models.TextField(blank=True, null=True, default=None)
-    preview_image = models.ImageField('products/preview')
+    preview_image = models.ImageField('preview_image')
     price = models.IntegerField(verbose_name='Price')
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
@@ -56,3 +56,6 @@ class Attribute(models.Model):
     product = models.ForeignKey(Product, on_delete=models.DO_NOTHING, related_name='attributes')
     size = models.ForeignKey(Size, on_delete=models.DO_NOTHING)
     color = models.ForeignKey(Color, on_delete=models.DO_NOTHING)
+
+    def get_model_fields(model):
+        return model._meta.fields
