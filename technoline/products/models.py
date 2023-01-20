@@ -53,9 +53,9 @@ class Color(models.Model):
 
 
 class Attribute(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.DO_NOTHING, related_name='attributes')
-    size = models.ForeignKey(Size, on_delete=models.DO_NOTHING)
-    color = models.ForeignKey(Color, on_delete=models.DO_NOTHING)
+    product = models.ForeignKey(Product, on_delete=models.DO_NOTHING, related_name='attributes', verbose_name='Model')
+    size = models.ForeignKey(Size, on_delete=models.DO_NOTHING, verbose_name='Size')
+    color = models.ForeignKey(Color, on_delete=models.DO_NOTHING, verbose_name='Color')
 
-    def get_model_fields(model):
-        return model._meta.fields
+    def get_model_fields(self):
+        return [(field.verbose_name, getattr(self, field.name)) for field in Attribute._meta.fields]

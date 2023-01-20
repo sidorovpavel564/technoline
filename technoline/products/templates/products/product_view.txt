@@ -1,0 +1,8 @@
+<li>{{ attribute.verbose_name }}: {{ attribute.name }}</li>
+					<li>Model: {{ smartphone.model_name }}</li>
+					<li>Release Date: {{ smartphone.release_date }}</li>
+					<li>Processor model: {{ smartphone.processor_model }}</li>
+					<li>Display Type: {{ smartphone.display_type }}</li>
+					<li>Display Size: {{ smartphone.display_size }}</li>
+					<li>Display Resolution: {{ smartphone.display_resolution }}</li>
+					<li>Color: {{ smartphone.color }}</li>

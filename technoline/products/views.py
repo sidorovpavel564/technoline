@@ -2,22 +2,24 @@ from django.shortcuts import render
 
 from .models import Product
 
+from django.forms.models import model_to_dict
+
 def index(request):
     products = Product.objects.all()
-    print(products)
-    # asd = product_list[0]
-    # print(asd)
-    # product_list = asd.images.all()
-    # print(product_list)
-    return render(request, 'products/index.html', {'products': products})
+    context = {
+        'products': products
+    }
+    return render(request, 'products/index.html', context)
 
 
-def product_view(request):
-    product = Product.objects.get(pk=1)
-    f = product.attributes.get()
-    print(f)
-    print(f.color)
-    print(f.get_model_fields())
+def product_view(request, product_id):
+    product = Product.objects.get(pk=product_id)
+    # f = product.attributes.get()
+    # print(f)
+    # print(model_to_dict(f))
+    # print(f.color)
+    # print(f.get_model_fields())
+    # print(getattr(f, 'product'))
     for image in product.images.all():
         print(image.image.url
     )
