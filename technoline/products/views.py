@@ -1,13 +1,15 @@
 from django.shortcuts import render
 
-from .models import Product
+from .models import Product, Category
 
 from django.forms.models import model_to_dict
 
 def index(request):
     products = Product.objects.all()
+    categories = Category.objects.all()
     context = {
-        'products': products
+        'products': products,
+        'categories': categories
     }
     return render(request, 'products/index.html', context)
 
