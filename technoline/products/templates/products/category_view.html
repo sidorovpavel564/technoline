@@ -3,14 +3,9 @@
 {% block content %}
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-4">
-				<div class="card shadow-sm p-3 mb-5 bg-body rounded">
-					<h5>Categories</h5>
-					{% for category in categories %}
-					<a href="category/{{ category }}">{{ category }}s</a>
-					{% endfor %}
-				</div>
-			</div>
+			<h5>Category: {{ category }} - Found {{ products.count }} products</h5>
+		</div>
+		<div class="row">
 			<div class="col">
 				{% for product in products %}
 					{% include 'products/product_card.html' with product=product %}
