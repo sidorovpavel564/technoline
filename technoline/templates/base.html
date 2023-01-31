@@ -6,21 +6,31 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="icon" href="/static/logo.svg">
 	<title>{% block title %}Tecnoline{% endblock %}</title>
-	<!-- Load static - Bootstrap v5.2.3 -->
+	<!-- Load static - MDB-free-6.1.0 -->
 	{% load static %}
-	<link rel="stylesheet" href="{% static 'bootstrap-5.2.3-dist/css/bootstrap.min.css' %}">
-	<script src="{% static 'bootstrap-5.2.3-dist/js/bootstrap.min.js' %}"></script>
+	<link href="{% static 'mdb-standart-ui-kit-free-6.1.0/css/mdb.min.css' %}" rel="stylesheet">
+
+	<!-- Font Awesome -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
 </head>
 
 <body style="padding-top:56px;">
 	<section class="pt-4">
-		{% include "nav.html" %}
-		<!-- TODO nav.html -->
-		{% block content %}
+		<header class="section-header fixed-top py-1 bg-light border-bottom">
+			<div class="container">
+				{% include "nav.html" %}
+			</div>
+		</header>
+		<div class="container">
+			{% block content %}
 			<!-- page content -->
-		{% endblock %}
-		<!-- TODO footer.html -->
+			{% endblock %}
+		</div>
 		{% include "footer.html" %}
 	</section>
+	<!-- MDB JS -->
+	<script src="{% static 'mdb-standart-ui-kit-free-6.1.0/js/mdb.min.js' %}"></script>
 </body>
 </html>

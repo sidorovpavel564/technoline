@@ -1,43 +1,78 @@
-<header class="section-header fixed-top py-1 bg-light border-bottom">
-	<div class="container">
-		<nav class="navbar navbar-expand-lg bg-light">
-			<div class="container-fluid">
-				<a class="navbar-brand" href="{% url 'index' %}">
-					<img src="/static/logo.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-					Tecnoline
-				</a>
-				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-						<li class="nav-item">
-							<a class="nav-link active" aria-current="page" href="#">Categories</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Link</a>
-						</li>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-								Dropdown
-							</a>
-							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="#">Action</a></li>
-								<li><a class="dropdown-item" href="#">Another action</a></li>
-								<li><hr class="dropdown-divider"></li>
-								<li><a class="dropdown-item" href="#">Something else here</a></li>
-							</ul>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link disabled">Disabled</a>
-						</li>
-					</ul>
-					<form class="d-flex" role="search" method="GET" action="{% url 'search-view' %}">
-						<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="query">
-						<button class="btn btn-outline-primary" type="submit">Search</button>
-					</form>
-				</div>
-			</div>
-		</nav>
-	</div>
-</header>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <!-- Container wrapper -->
+  <div class="container-fluid justify-content-between">
+    <div class="d-flex">
+      <!-- Navbar brand -->
+      <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="{% url 'index' %}">
+        <img
+          src="/static/logo.svg"
+          width="30"
+          height="30"
+          alt=""
+          loading="lazy"
+          style="margin-top: -1px;"
+        />
+        Technoline
+      </a>
+
+      <!-- Toggle button -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-mdb-toggle="collapse"
+        data-mdb-target="#navbarButtonsExample"
+        aria-controls="navbarButtonsExample"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <a class="nav-link w-auto my-auto d-none d-sm-flex" href="#">Dashboard</a>
+
+    </div>
+
+    <ul class="navbar-nav flex-row d-none d-md-flex">
+      <li class="nav-item me-3 me-lg-1 active">
+        <!-- Search -->
+        <form class="input-group w-auto my-auto d-none d-sm-flex" role="search" method="GET" action="{% url 'search-view' %}">
+          <div class="input-group">
+            <div class="form-outline">
+              <input type="search" id="form1" class="form-control" name="query"/>
+              <label class="form-label" for="form1">Search</label>
+            </div>
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </form>
+        <!-- Search -->
+      </li>
+    </ul>
+
+    <ul class="navbar-nav flex-row">
+      <li class="nav-item me-3 me-lg-1">
+        {% if user.is_authenticated %}
+        {{user.username}}
+        <a href="{% url 'logout' %}">Logout</a>
+        <a href="{% url 'password_change' %}">Change password</a>
+        {% else %}
+        <div class="d-flex align-items-center">
+          <a class="btn btn-link px-3 me-2" href="{% url 'login' %}">Login</a>
+          <a class="btn btn-primary me-3" href="{% url 'signup' %}">Sign up</a>
+          <a
+            class="btn btn-dark px-3"
+            href="https://github.com/mdbootstrap/mdb-ui-kit"
+            role="button"
+            ><i class="fab fa-github"></i
+          ></a>
+        </div>
+      {% endif %}
+      </li>
+    </ul>
+
+  </div>
+  <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->

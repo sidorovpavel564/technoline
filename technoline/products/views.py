@@ -1,7 +1,9 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
-from .models import Product, Category
+from .models import Category, Product
 
+@login_required
 def index(request):
     products = Product.objects.all()
     categories = Category.objects.all()
@@ -14,9 +16,6 @@ def index(request):
 
 def product_view(request, product_id):
     product = Product.objects.get(pk=product_id)
-    for image in product.images.all():
-        print(image.image.url
-    )
     context = {
         'product': product
     }

@@ -1,16 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<div class="container">
-		<div class="row">
-			<h5>Category: {{ category }} - Found {{ products.count }} products</h5>
-		</div>
-		<div class="row">
-			<div class="col">
-				{% for product in products %}
-					{% include 'products/product_card.html' with product=product %}
-				{% endfor %}
-			</div>
+	<div class="row">
+		<h5>Category: {{ category }} - Found {{ products.count }} products</h5>
+	</div>
+	<div class="row">
+		<div class="col">
+			{% for product in products %}
+				{% include 'products/product_card.html' with product=product %}
+			{% endfor %}
 		</div>
 	</div>
 {% endblock content %}
