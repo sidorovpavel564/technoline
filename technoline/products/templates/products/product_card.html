@@ -1,0 +1,21 @@
+<div class="card p-3 mb-3 shadow-sm" style="width: 900px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="{{ product.preview_image.url }}" class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">
+          <a href="/product/{{ product.id }}">{{ product.product_name }}</a>
+        </h5>
+        <p class="card-text">{{ product.description }}</p>
+        <a href="{% url 'add_to_favorites' product_id=product.id %}" class="btn btn-outline-primary">
+          <i class="far fa-heart fa-2x"></i>
+        </a>
+        <a href="{% url 'add_to_cart' product_id=product.id %}" class="btn btn-primary">
+          <i class="fas fa-cart-plus fa-2x"></i>
+        </a>
+      </div>
+    </div> <!--col-->
+  </div> <!--row-->
+</div> <!--card-->

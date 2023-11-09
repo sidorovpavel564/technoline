@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div class="col">
+		<div class="card p-3 mb-3 shadow-sm" style="width: 20rem">
+			<h5>Categories</h5>
+			{% for category in categories %}
+			<a href="category/{{ category }}">{{ category }}s</a>
+			{% endfor %}
+		</div>
+	</div>
+	<div class="col">
+		{% for product in page %}
+			{% include 'products/product_card.html' with product=product %}
+		{% endfor %}
+		{% if page.has_other_pages %}
+			{% include "paginator.html" with items=page paginator=paginator %}
+		{% endif %}
+	</div>
+{% endblock content %}

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+
+<div class="row d-flex justify-content-center">
+	<div style="width: 50rem;">
+		<div class="card" style="border-radius: 1rem;">
+			<h5 class="card-header">Register</h5>
+			<div class="card-body p-5 text-center">
+
+				<div class="tab-pane fade show active" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
+					<form method="POST" action="{% url 'signup' %}">
+						{% csrf_token %}
+
+						{% if form.errors %}
+							{% for field, errors in form.errors.items %}
+								{% for error in errors %}
+									<div class="note note-danger mb-3">
+										<i class="fas fa-exclamation-circle"></i> {{ error }}
+									</div>
+								{% endfor %}
+							{% endfor %}
+						{% endif %}
+
+						{% for field in form %}
+							{% if field.help_text %}
+								<div class="note note-primary mb-3">
+									<strong>{{ field.label }}: </strong>{{ field.help_text }}
+								</div>
+								{% endif %}
+							<div class="form-outline mb-4">
+								{% if field.field.required %}<i class="fas fa-exclamation-circle trailing"></i>{% endif %}
+								{{ field }}
+								<label class="form-label" for="{{ field.id_for_label }}" style="margin-left: 0px;">{{ field.label }}</label>
+							</div>
+						{% endfor %}
+
+						<!-- Checkbox -->
+						<div class="form-check d-flex justify-content-center mb-4">
+							<input class="form-check-input me-2" type="checkbox" value="" id="registerCheck" checked
+								aria-describedby="registerCheckHelpText" />
+							<label class="form-check-label" for="registerCheck">
+								I have read and agree to the terms
+							</label>
+						</div>
+
+						<!-- Submit button -->
+						<button type="submit" class="btn btn-primary btn-block mb-3">Sign in</button>
+					</form>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock content%}

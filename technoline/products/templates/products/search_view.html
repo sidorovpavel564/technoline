@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div class="row">
+		<h5>Found {{ products.count }}
+			product{% if products.count > 1 %}s{% endif %} 
+			in {{ categories|length }}
+			{% if categories|length > 1 %}categories{% else %}category{% endif %}: 
+			{% for category in categories %}
+				{{ category }}{% if not forloop.last %},{% endif %} 
+			{% endfor %}
+		</h5>
+	</div>
+	<div class="row">
+		<div class="col">
+			{% for product in products %}
+				{% include 'products/product_card.html' with product=product %}
+			{% endfor %}
+		</div>
+	</div>
+{% endblock content %}

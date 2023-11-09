@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="col-md-10">
+	<div class="row">
+		<div class="col">
+			<nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+				<ol class="breadcrumb mb-0">
+					<li class="breadcrumb-item active" aria-current="page">{{ product.product_name }}</li>
+				</ol>
+			</nav>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col">
+			<div class="card shadow mb-4">
+				<div class="card-body">
+					<div class="row">
+						<div class="col">
+							<div class="card shadow p-3 mb-5 bg-body rounded" style="width: 30rem;">
+								{% include "carousel.html" with product=product %}
+							</div>
+						</div>
+						<div class="col">
+							<div class="card shadow p-3 mb-5 bg-body rounded" style="width: 30rem;">
+								<p class="fw-bold fs-5">Technical Specifications</p>
+								<ul>
+									<li>Product category: {{ product.category }}</li>
+									<p></p>
+									{% for name, value in product.attributes.get.get_model_fields %}
+										<li>{{ name }}: {{ value }}</li>
+									{% endfor %}
+								</ul>
+							</div> <!--card-->
+		
+							<div class="card shadow p-3 mb-5 bg-body rounded" style="width: 30rem;">
+								<div class="container">
+									<div class="row align-items-center">
+										<div class="col-auto">
+											<h4 class="mb-1 me-1">{{ product.price }}</h4>
+										</div> <!--col-->
+										<div class="col-auto">
+											<a class="btn btn-primary btn-lg" href="{% url 'add_to_favorites' product_id=product.id %}">
+												<i class="far fa-heart fa-lg"></i>
+											</a>
+										</div> <!--col-->
+										<div class="col-auto">
+											<a class="btn btn-primary btn-lg"" href="{% url 'add_to_cart' product_id=product.id %}">
+												<i class="fas fa-cart-plus fa-lg"></i>
+											</a>
+										</div> <!--col-->
+										<div class="col">
+											<button type="button" class="btn btn-secondary btn-lg w-75" disabled>Buy</button>
+										</div> <!--col-->
+									</div> <!--row-->
+								</div> <!--container-->
+							</div> <!--card-->
+						</div> <!--col-->
+					</div> <!--row-->
+				</div> <!--card-body-->
+			</div> <!--card-->
+		</div>
+	</div>
+	<a class="btn btn-primary btn-lg mb-4" href="{% url 'post_review' product_id=product.id %}">Post your review</a>
+	<div class="row">
+		<div class="col">
+			<nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+				<ol class="breadcrumb mb-0">
+					<li class="breadcrumb-item active" aria-current="page">Reviews</li>
+				</ol>
+			</nav>
+		</div>
+	</div>
+	{% if reviews %}
+		{% include 'products/review_item.html' %}
+	{% else %}
+		This product has no reviews yet.
+	{% endif %}
+</div>
+{% endblock content %}

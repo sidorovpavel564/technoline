@@ -1,0 +1,40 @@
+{% for review in reviews %}
+	<div class="row">
+		<div class="col">
+			<div class="card shadow p-3 mb-4 bg-body rounded">
+				<div class="d-flex mb-2 align-items-center justify-content-start">
+					{% if review.author.profile.profile_picture %}
+						<img
+							src="{{ review.author.profile.profile_picture.url }}"
+							class="rounded-circle img-fluid me-3"
+							style="width: 48px;"
+							alt="..."
+						/>
+					{% else %}
+						<i class="far fa-user-circle fa-3x me-3"></i>
+					{% endif %}
+					<a class="fw-bold me-3" href="">
+						{{ review.author.username }}
+					</a>
+					<small class="text-muted">{{ review.created }}</small>
+				</div>
+				{{ review.text }}
+				{% if review.images.all %}
+					<hr>
+					<div class="row">
+						{% for review_image_object in review.images.all %}
+						<div class="col">
+							<div class="bg-image hover-overlay ripple" style="max-width: 12rem;">
+								<img src="{{ review_image_object.image.url }}" class="img-fluid" />
+								<a>
+									<div class="mask" style="background-color: rgba(57, 192, 237, 0.2);"></div>
+								</a>
+							</div>
+						</div>
+					{% endfor %}
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+{% endfor %}

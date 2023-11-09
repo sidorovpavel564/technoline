@@ -1,0 +1,157 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <!-- Container wrapper -->
+  <div class="container-fluid justify-content-between">
+    <div class="d-flex align-items-center">
+      <!-- Navbar brand -->
+      <a class="navbar-brand me-2 mb-1 d-flex align-items-center" href="{% url 'index' %}">
+        <img
+          src="/static/logo.svg"
+          width="30"
+          height="30"
+          alt=""
+          loading="lazy"
+        />
+        Technoline
+      </a>
+
+      <!-- Toggle button -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-mdb-toggle="collapse"
+        data-mdb-target="#navbarButtonsExample"
+        aria-controls="navbarButtonsExample"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <a
+        class="btn btn-dark btn-floating"
+        href="https://github.com/sidorovpavel564/technoline"
+        ><i class="fab fa-github fa-2x"></i>
+      </a>
+    </div>
+
+    <ul class="navbar-nav flex-row d-none d-md-flex">
+      <li class="nav-item me-3 me-lg-1 active">
+        <!-- Search -->
+        <form class="input-group w-auto my-auto d-none d-sm-flex" role="search" method="GET" action="{% url 'search-view' %}">
+          <div class="input-group">
+            <div class="form-outline">
+              <input type="search" id="form1" class="form-control" name="query"/>
+              <label class="form-label" for="form1">Search</label>
+            </div>
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
+        </form>
+        <!-- Search -->
+      </li>
+    </ul>
+    
+    <div class="d-flex align-items-center">
+      {% if user.is_authenticated %}
+          <!-- Shopping cart -->
+          <a class="link-secondary me-2" href="{% url 'cart_view' %}">
+            <img
+                src="/static/cart-icon.svg"
+                class="rounded-circle"
+                height="30"
+                alt=""
+                loading="lazy"
+              />
+          </a>
+
+          <!-- Favourites (heart) -->
+          <a class="link-secondary me-2" href="{% url 'favorites_view' %}">
+            <img
+                src="/static/favourite-icon.svg"
+                class="rounded-circle"
+                height="30"
+                alt=""
+                loading="lazy"
+              />
+          </a>
+    
+          <!-- Notifications -->
+          <div class="dropdown">
+            <a
+              class="link-secondary me-3 dropdown-toggle hidden-arrow"
+              href="#"
+              id="navbarDropdownMenuLink"
+              role="button"
+              data-mdb-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <img
+                src="/static/icons8-notification.svg"
+                class="rounded-circle"
+                height="30"
+                alt=""
+                loading="lazy"
+              />
+              <span class="badge rounded-pill badge-notification bg-danger">1</span>
+            </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end"
+              aria-labelledby="navbarDropdownMenuLink"
+            >
+              <li>
+                <a class="dropdown-item" href="#">Some news</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">Another news</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Avatar -->
+          <div class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle d-flex align-items-center"
+              href="#"
+              id="navbarDropdownMenuLink"
+              role="button"
+              data-mdb-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <img
+                src="/static/user-icon.svg"
+                class="rounded-circle"
+                height="30"
+                alt=""
+                loading="lazy"
+              />
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li>
+                <a class="dropdown-item" href="{% url 'my_profile_view' %}">My profile</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="{% url 'user_orders_view' %}">My orders</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="{% url 'password_change' %}">Change password</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+              </li>
+            </ul>
+          </div>
+      {% else %}
+      <a class="btn btn-link px-3 me-2" href="{% url 'login' %}">Login</a>
+      <a class="btn btn-primary me-2" href="{% url 'signup' %}">Sign up</a>
+      {% endif %}
+    </div>
+
+  </div>
+  <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->

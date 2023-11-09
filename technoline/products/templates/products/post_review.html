@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="col-md-9">
+	<div class="row">
+		<div class="col">
+			<nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+				<ol class="breadcrumb mb-0">
+					<li class="breadcrumb-item"><a href="{% url 'product_view' product_id=product.id %}">{{ product.product_name }}</a></li>
+					<li class="breadcrumb-item active" aria-current="page">Post your review</li>
+				</ol>
+			</nav>
+		</div>
+	</div>
+
+	<div class="row">
+		<!-- Review form -->
+		<form method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+			<div class="card mb-4">
+				<div class="card-body">Post your review</div>
+				<div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
+					<div class="d-flex flex-start w-150">
+						{% if user.profile.profile_picture %}
+							<img 
+								src="{{ user.profile.profile_picture.url }}"
+								class="rounded-circle img-fluid me-3"
+								style="width: 48px; height: 48px;"
+								alt="..."
+							>
+						{% else %}
+							<i class="far fa-user-circle fa-3x me-3"></i>
+						{% endif %}
+						{% for field in comment_form %}
+						<div class="form-outline w-50 me-3">
+							{{ field }}
+							<label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+						</div>
+						{% endfor %}
+						<div style="width: 22rem;">
+							<label class="form-label" for="customFile">Add images to your review</label>
+							<input class="form-control" type="file" name="images" accept="image/*" multiple/>
+						</div>
+					</div>
+					<div class="float-end mt-2 pt-1">
+						<!-- Submit button -->
+						<button type="submit" class="btn btn-primary">Post review</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+{% endblock content %}

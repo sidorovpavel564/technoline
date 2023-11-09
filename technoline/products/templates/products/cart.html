@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+	<div class="row">
+		<div class="d-flex justify-content-between align-items-center mb-4">
+			<h3 class="fw-normal mb-0 text-black">Shopping Cart</h3>
+		</div>
+		{% if cart %}
+			<div class="col">
+				{% for cart_obj in cart %}
+				<div class="card rounded-3 mb-4">
+					<div class="card-body p-4">
+						<div class="row d-flex justify-content-between align-items-center">
+							<div class="col-md-2 col-lg-2 col-xl-2">
+								<img
+									src="{{ cart_obj.product.preview_image.url }}"
+									class="img-fluid rounded-3" alt="Cotton T-shirt"
+								>
+							</div>
+							<div class="col-md-3 col-lg-3 col-xl-3">
+								<p class="lead fw-normal mb-2">{{ cart_obj.product.product_name }}</p>
+								<p><span class="text-muted">Size: </span>M <span class="text-muted">Color: </span>Grey</p>
+							</div>
+							<div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+								<a href="{% url 'decrease_product_quantity_in_cart' product_id=cart_obj.product.id %}" class="btn btn-link px-2"
+									onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+									<i class="fas fa-minus"></i>
+								</a>
+
+								<input id="form1" min="1" name="quantity" value="{{ cart_obj.quantity }}" type="number"
+									class="form-control form-control-sm" />
+
+								<a href="{% url 'add_to_cart' product_id=cart_obj.product.id %}" class="btn btn-link px-2"
+									onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+									<i class="fas fa-plus"></i>
+								</a>
+							</div>
+							<div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+								<h5 class="mb-0">{% widthratio cart_obj.product.price 1 cart_obj.quantity %}</h5>
+								<p><span class="text-muted">{{ cart_obj.product.price }}</span> x <span class="text-muted">{{ cart_obj.quantity }}</span></p>
+							</div>
+							<div class="col-md-1 col-lg-1 col-xl-1 text-end">
+								<a href="{% url 'remove_from_cart' product_id=cart_obj.product.pk %}" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
+							</div>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+
+			<div class="col-lg-3">
+				<div class="card bg-primary text-white rounded-3">
+					<div class="card-body">
+						<div class="d-flex justify-content-between align-items-center mb-4">
+							<h5 class="mb-0">Summary</h5>
+						</div>
+	
+						<hr class="my-4">
+	
+						<div class="d-flex justify-content-between">
+							<p class="mb-2">Items</p>
+							<p class="mb-2">{{ items_count }}</p>
+						</div>
+	
+						<div class="d-flex justify-content-between">
+							<p class="mb-2">Discount</p>
+							<p class="mb-2">0</p>
+						</div>
+	
+						<div class="d-flex justify-content-between mb-4">
+							<p class="mb-2">Total</p>
+							<p class="mb-2">{{ total }}</p>
+						</div>
+	
+						<a href="{% url 'checkout' %}" class="btn btn-info btn-block btn-lg">
+							<div class="d-flex justify-content-center">
+								<span>Proceed to checkout <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
+							</div>
+						</a>
+	
+					</div>
+				</div>
+			</div>
+		{% else %}
+		<p>Shopping cart is empty</p>
+		{% endif %}
+
+	</div>
+</div>
+{% endblock content %}

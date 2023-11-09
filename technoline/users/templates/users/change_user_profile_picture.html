@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+
+<div class="row d-flex justify-content-center">
+	<div style="width: 50rem;">
+		<div class="card" style="border-radius: 1rem;">
+			<h5 class="card-header">Change my account info</h5>
+			<div class="card-body p-5 text-center">
+				
+				<div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
+					<form method="POST" enctype="multipart/form-data">
+						{% csrf_token %}
+
+						{% for field in form %}
+							{{ field }}
+						{% endfor %}
+
+					<!-- Submit button -->
+					<button type="submit" class="btn btn-primary btn-block mb-4">Save</button>
+					</form>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content%}

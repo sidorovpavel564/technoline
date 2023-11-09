@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+
+<div class="row d-flex justify-content-center">
+	<div style="width: 50rem;">
+		<div class="card" style="border-radius: 1rem;">
+			<h5 class="card-header">Order</h5>
+			<div class="card-body p-5 text-center">
+				
+				<div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
+					<form method="POST">
+						{% csrf_token %}
+
+						{% if next %}
+							<div class="note note-danger mb-3">
+								<i class="fas fa-exclamation-circle"></i> You have accessed a page that can only be accessed by logged-in users.<br>
+								Please log in.
+							</div>
+        		{% endif %}
+
+						{% if order_form.errors %}
+							{% for field, errors in order_form.errors.items %}
+								{% for error in errors %}
+									<div class="note note-danger mb-3">
+										<i class="fas fa-exclamation-circle"></i> {{ error }}
+									</div>
+								{% endfor %}
+							{% endfor %}
+						{% endif %}
+
+						{% for field in order_form %}
+							{% if field.help_text %}
+								<div class="note note-primary mb-3">
+									<strong>{{ field.label }}: </strong>{{ field.help_text }}
+								</div>
+								{% endif %}
+							<div class="form-outline mb-4">
+								{% if field.field.required %}<i class="fas fa-exclamation-circle trailing"></i>{% endif %}
+								{{ field }}
+								<label class="form-label" for="{{ field.id_for_label }}" style="margin-left: 0px;">{{ field.label }}</label>
+							</div>
+						{% endfor %}
+
+						<!-- Submit button -->
+						<button type="submit" class="btn btn-primary btn-block mb-4">Submit</button>
+					</form>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content%}
